@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>upload files</title>
+</head>
+<body>
+	<h1>文件下载地址</h1>
+	{%for file_obj in file_list %}
+	<p>
+		<a href="{{file_obj.link}}" target="_blank">{{file_obj.name}}</a>
+	</p>
+	{% endfor %}
+    <p>上传文件地址：<a href="/uploads" target="_blank">上传文件</a></p>
+    <p>执行命令地址：<a href="/home" target="_blank">执行命令</a></p>
+</body>
+</html>

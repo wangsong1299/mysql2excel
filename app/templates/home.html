@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style type="text/css">
+            h1 {
+                margin: 20px auto; text-align: center;
+            }
+            .g-body {
+                position: relative; font-size: 14px;
+                width: 1000px; margin: 0 auto;
+            }
+            .m-content {
+                display: inline-block;
+                width: 760px; height:500px; padding: 10px;
+                margin: 10px auto; line-height: 1.2;
+                background-color: #f0f0f0; overflow-y:scroll;
+                vertical-align: top;
+            }
+            .m-sqlcfg {
+                display: inline-block; padding: 10px;
+                width: 190px; height: 500px; 
+            }
+            .m-enter {
+                width: 1000px; height:20px; padding: 0;
+                margin: 10px auto;
+                line-height: 1.6; font-size: 16px;
+            }
+            input {
+                display: inline-block;
+            }
+            .m-enter input[type="text"] {
+                width: 800px; line-height: 1.8;
+            }
+            .m-enter input[type="button"] {
+                width: 80px; line-height: 30px; height: 30px;
+            }
+            .m-enter input[type="checkbox"] {
+                width: 16px; height: 16px; vertical-align: center;
+            }
+            .m-desc {
+                padding: 10px; margin: 20px auto;
+                width: 980px; min-height: 100px;
+            }
+            .m-desc p3 {
+                margin-top: 10px;
+            }
+
+        </style>
+    </head>
+	<body>
+		<h1>Welcome Console!</h1>
+        <div class="g-body">
+            <div id="ws-content" class="m-content"></div>
+            <div class="m-sqlcfg">
+                <h3>1.数据库常用设置：</h3>
+                <p>文姐帮<br/>jobhelper_db</p>
+                <p>招财猫<br/>finance_db</p>
+                <p>日线数据<br/>tushare_test_db</p>
+                <p>其他股票数据<br/>tushare_db</p>
+                <p>上传文件地址：<a href="/uploads" target="_blank">上传文件</a></p>
+                <p>下载文件地址：<a href="/downloads" target="_blank">下载文件</a></p>
+            </div>
+            <div class="m-enter">
+                <input  name="ws-autosave" id="ws-autosave" type="checkbox">
+                <label for="">是否自动存储中间文件</label>
+            </div>
+            <div class="m-enter">
+                <input id="ws-message" type="text">
+                <input id="ws-enter" type="button" value="输入">
+            </div>
+            <div class="m-desc">
+                <h2>使用方法</h2>
+
+
+                <h3>2.取mysql数据到内存</h3>
+                <em>例子：</em>
+                <p>loadmysql --db tushare_test_db --tar kd_600000 --query select * from hist_data_kd_600000 where `datetime` > "2016-05-30";</p>
+                <em>例子：</em>
+                <p>loadmysql --db finance_db --tar trade_buy_record --query select * from trades_tradebuyrecord where `deal_time` > "2016-05-30";</p>
+                <em>例子：</em>
+                <p>loadmysql --db tushare_db --tar trade_buy_record --query select * from report_data_2012_1;</p>
+
+                <h3>3.取excel数据到内存</h3>
+                <p>首先需要通过/uploads 将excel文件上传到服务器</p>
+                <p>其次可通过/downloads 查看文件内容</p>
+                <em>例子：</em>
+                <p>loadexcel --tar trade_buy_record</p>
+                <em>例子：</em>
+                <p>loadexcel --tar trade_buy_record --sheet Sheet1</p>
+
+                <h3>4.merge两个数据文件</h3>
+                <p>需要取出内存中的target名字，进行合并(left/right/inner/outer)</p>
+                <em>例子：</em>
+                <p>merge --tar trade_result --src trade_buy_record kd_600000 --join left cid aid</p>
+
+                <h3>5.存储文件到excel</h3>
+                <p>将内存中的文件存储到excel</p>
+                <em>例子：</em>
+                <p>saveexcel --tar trade_buy_record --src trade_buy_record</p>
+            </div>
+        </div>
+        <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="/static/js/socket_channel.js"></script>
+	</body>
+</html>

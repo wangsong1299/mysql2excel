@@ -1,0 +1,21 @@
+apt-get install libxml2-dev libxslt1-dev python-dev
+apt-get install libmysqlclient-dev
+
+pip install mysql-python sqlalchemy
+pip install numpy pandas
+pip install lxml --upgrade
+pip install openpyxl，xlrd
+pip install --user django==1.9.7
+pip install --user channels
+pip install --user asgi_redis
+
+
+python manage.py runserver 0.0.0.0:8000
+
+daphne main.asgi:channel_layer -b 0.0.0.0 -p 8000
+python manage.py runworker
+
+python manage.py runworker --only-channels=http.* --only-channels=websocket.*
+
+
+http://10.164.97.15:8000/home/
